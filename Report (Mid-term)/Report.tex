@@ -1,0 +1,1855 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[utf8]{vietnam}
+\usepackage{amsmath, amsthm, amssymb,latexsym,amscd,amsfonts,enumerate}
+\usepackage[top=3.5cm, bottom=3.0cm, left=3.5cm, right=2.0cm]{geometry}  % căn lề theo quy chuẩn KLTN
+\usepackage{color, fancyhdr, graphicx, wrapfig}
+\usepackage[unicode]{hyperref}
+\usepackage{listings}
+\usepackage{subfig}
+
+\newtheorem{dn}{Định nghĩa}[section]
+\newtheorem{tc}[dn]{Tính chất}
+\newtheorem{dl}[dn]{Định lí}
+\newtheorem{md}[dn]{Mệnh đề}
+\newtheorem{bd}[dn]{Bổ đề}
+\newtheorem{hq}[dn]{Hệ quả}
+\newtheorem{nx}[dn]{Nhận xét}
+\newtheorem{vd}{Ví dụ}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{frame=tb,
+  language=SQL,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+
+\pagenumbering{roman}\pagestyle{plain}
+\pagestyle{fancy}
+\lhead{\it Bộ môn Cơ Sở Dữ Liệu}
+\rhead{\it Đại học Bách Khoa Hà Nội}
+\lfoot{\it Nguyễn Công Hiếu - 20195016} 			         
+\rfoot{\it Toán-tin 02 khóa 64}
+\renewcommand{\headrulewidth}{1,2pt} 			
+\renewcommand{\footrulewidth}{1,2pt}   % Cái này là tiêu đề chạy
+
+\begin{document} 
+
+\fontsize{13pt}{18pt}\selectfont   % Lệnh thay đổi cỡ chữ thành cỡ 13, cỡ dòng 18 (theo quy chuẩn của Khóa Luận TN).
+
+\setlength{\baselineskip}{18truept}
+\begin{titlepage}                                                       % Đây là trang bìa
+\begin{center}
+{\large\bf TRƯỜNG ĐẠI HỌC BÁCH KHOA HÀ NỘI}\\
+{\large\bf VIỆN TOÁN ỨNG DỤNG VÀ TIN HỌC} \\
+{---------------------o0o--------------------}
+\vskip 1cm
+\includegraphics[scale=0.4]{Logo HUST}
+\vskip 2cm
+{\bf BÁO CÁO CUỐI KỲ}\\[1cm]
+{\Large\bf \textbf{TRÌNH BÀY NỘI DUNG THỰC HÀNH HÀNG TUẦN}}\\
+\vskip 1cm
+{\bf {\it Bộ môn:}  Cơ sở dữ liệu}
+\vskip 2cm
+
+\begin{tabular}{r l}
+Giảng viên hướng dẫn:&{\bf Ths.Nguyễn Danh Tú}\\[0.5cm]
+Sinh viên:&{\bf Nguyễn Công Hiếu - 20195016}\\[0.5cm]
+Lớp:&{\bf Toán - tin 02}
+\end{tabular}
+\vfill
+{\bf HÀ NỘI, 8/2021}
+\end{center}
+\end{titlepage}
+
+
+
+\chapter*{Lời nói đầu}
+\addcontentsline{toc}{chapter}{{\bf  Lời nói đầu}\rm} %Đưa lời nói đầu vào mục lục
+Trong thời đại của công nghệ số, nơi mà thông tin, tri thức được biểu diễn qua những con số từ đó dẫn tới một khối lượng lớn những dữ liệu cần được xử lý và lưu trữ một cách khoa học. Để giải quyết những vấn đề đó trong thực tiễn kinh tế - kỹ thuật - xã hội, các {\it Cơ Sở Dữ Liệu} đã được thiết kế, áp dụng để chúng ta có thể tiếp cận tới thông tin một cách dễ dàng.
+
+Thông qua 16 tiết của bộ môn {\it Cơ Sở Dữ Liệu} và sự hướng dẫn tận tình của thầy {\bf Nguyễn Danh Tú}, em đã phần nào nắm được những kiến thức căn bản nhất của một CSDL như cách thiết kế, vận hành, sửa đổi,... cũng như cách để sử dụng {\it Hệ Cơ Sở Dữ Liệu.}
+
+Em xin chân thành cảm ơn những kiến thức quý báu mà thầy đã truyền dạy! 
+
+
+\tableofcontents	                        % Lệnh mục lục
+
+
+\chapter{Nội dung các tuần}         % Chương 1
+\pagenumbering{arabic}                      % Đánh lại trang
+\newpage
+\section{Tuần 1}
+\subsection{Bài 1}
+	\begin{center}
+		{\it Thiết lập hệ quản trị cơ sở dữ liệu trên máy tính cá nhân.}
+	\end{center}
+
+	{\bf INPUT:} 
+		Click vào đường \href{https://dev.mysql.com/downloads/installer/?fbclid=IwAR33jr0G_OOu_5pMoO9CV13o8TjdIwx_QxqX6UqMlQFssRO6RyXwyPhWJt8}{\bf link} sau đây và chọn tải bản phù hợp với máy tính.
+		
+	{\bf OUTPUT:}
+		Sau khi hoàn các bước được hướng dẫn khi cài MySQL, ta có thể kiểm tra bằng một số lệnh thông qua command line.
+	
+	{\bf SOURCE CODE:}
+		{\it mysqladmin -u root -p version}
+		
+	{\bf DISPLAY RESULTS:}
+		\vskip 0.2cm
+		\begin{center}
+			\includegraphics[scale=0.5]{Tuần 1-1}
+		\end{center}
+\subsection{Bài 2}
+	\begin{center}
+		{\it Thiết lập được môi trường làm việc với cơ sở dữ liệu từ máy chủ đơn vị.}
+	\end{center}
+
+	{\bf INPUT:}
+		\begin{itemize}
+			\item Host name
+			\item Port
+			\item User
+			\item Password
+		\end{itemize}
+	
+	{\bf ALGORITHM:}
+		Thông qua MySQL Workbench ta có thể truy cập vào các server khác nhau.
+	
+	{\bf DISPLAY RESULTS:}
+		\vskip 0.2cm
+		\begin{center}
+			\includegraphics[scale=0.5]{Tuần 1-2}
+		\end{center}	
+\subsection{Bài 3}
+	\begin{center}
+		{\it Tạo một sơ sở dữ liệu mẫu để làm việc.}
+	\end{center}
+	
+	{\bf INPUT:}
+		Click vào \href{https://www.mysqltutorial.org/mysql-sample-database.aspx?fbclid=IwAR2r3gprprxYYPcvhDT4RFaJo9Xgb9RMwhvLpqRLgD35RAV00l8oDvqc9SU}{\bf link} này để lấy sample DB.
+	
+	{\bf OUTPUT:}
+		Ta sẽ được một CSDL lưu trữ trong hệ quản trị CSDL.
+	
+	{\bf ALGORITHM:}
+		\begin{itemize}
+			\item Qua Export, Import:
+				\begin{itemize}
+					\item Cách 1: Trong MySQL Workbench trên thanh công cụ $\Longrightarrow$ Server $\Longrightarrow$ Data import/Data Export.
+					\item Cách 2: Vào command line gõ {\it mysql -u username -p databaseName < file.sql}
+				\end{itemize}
+			\item Qua Copy, Paste: Mở file .sql $\Longrightarrow$ Ctrl-C $\Longrightarrow$ Tạo 1 script mới và Ctrl-V.
+			\item Qua Backup, Restore: Trong command line, gõ {\it mysql -u [user] -p [databaseName] < [filename].sql} nếu đã tồn tại một database được backup trước đó.
+			\item Qua Attach, Detach:
+		\end{itemize}
+	
+	{\bf DISPLAY RESULTS:} Sau khi thực hiện ta được một cơ sở dữ liệu mẫu.
+		\vskip 0.2cm
+		\begin{center}
+			\includegraphics[scale=0.25, width=\linewidth]{Tuần 1-3}
+		\end{center}
+
+\newpage
+\section{Tuần 2}
+\subsection{Bài 1}
+	\begin{center}
+		{\it SELECT, ORDER BY, WHERE, SELECT DISTINCT}
+	\end{center}
+	
+	{\bf INPUT:}
+	
+	
+	{\bf OUTPUT:}
+	
+	
+	{\bf SOURCE CODE:}
+		\begin{lstlisting}
+			SELECT DISTINCT salesRepEmployeeNumber, city, country
+			FROM customers
+			WHERE state IS NOT NULL
+			ORDER BY customerName;
+		\end{lstlisting}
+	
+	
+	{\bf ALGORITHM:}
+		Lấy các thông tin(unique) salesRepEmployeeNumber, city, country từ bảng customers với điều state khác NULL và sắp xếp theo customerName.
+	
+	{\bf DISPLAY RESULTS:}
+		\begin{center}
+			\includegraphics[scale=.5]{Tuần 2-1}
+		\end{center}
+\subsection{Bài 2}
+	\begin{center}
+		{\it AND, OR, IN}
+	\end{center}		
+	
+	{\bf INPUT:}
+	
+	{\bf OUTPUT:}
+	
+	{\bf SOURCE CODE:}
+		\begin{lstlisting}
+			SELECT * FROM orderdetails
+			WHERE (orderLineNumber = 1 AND priceEach > 100.00)
+			OR (quantityOrdered IN (20,30,40));
+		\end{lstlisting}
+	{\bf ALGORITHM:}
+		Lấy tất cả các thông tin từ bảng orderdetails với điều kiện hoặc là quantityOrdered nằm trong bộ (20,30,40) hoặc là xảy ra đồng thời orderLineNumber = 1 và priceEach > 100.00
+	
+	{\bf DISPLAY RESULTS:}
+		\begin{center}
+			\includegraphics[scale=.5]{Tuần 2-2}
+		\end{center}
+\subsection{Bài 3}
+	\begin{center}
+		{\it BETWEEN, LIKE, LIMIT}
+	\end{center}
+	
+	{\bf INPUT:}
+	
+	{\bf OUTPUT:}
+	
+	{\bf SOURCE CODE:}
+		\begin{lstlisting}
+			SELECT customerNumber, salesRepEmployeeNumber
+			FROM customers
+			WHERE (salesRepEmployeeNumber LIKE '11__')
+			AND (customerNumber BETWEEN 200 AND 300)
+			ORDER BY customerNumber
+			LIMIT 2,2;
+		\end{lstlisting}
+	
+	{\bf ALGORITHM:}
+		Lấy các thông tin customerNumber, salesRepEmployeeNumber từ bảng customers với điều kiện đồng thời xảy ra salesRepEmployeeNumber có dạng 11\_\_ và customerNumber thuộc khoảng (200;300). Các thông tin được sắp xếp theo customerNumber và chỉ lấy ra 2 bộ dữ liệu bắt đầu từ bộ thứ 3.
+	
+	{\bf DISPLAY RESULTS:}
+		\begin{center}
+			\includegraphics[scale=.5]{Tuần 2-3}
+		\end{center}
+	
+\subsection{Bài 4}
+	\begin{center}
+		{\it IS NULL, TABLE/COLUMN ALIASES}
+	\end{center}
+	
+	{\bf INPUT:}
+	
+	{\bf OUTPUT:}
+	
+	{\bf SOURCE CODE:}
+		\begin{lstlisting}
+			SELECT
+			customerNumber AS id,
+			salesRepEmployeeNumber as SREN
+			FROM customers AS table_1
+			WHERE (salesRepEmployeeNumber IS NULL);				
+		\end{lstlisting}
+	{\bf ALGORITHM:}
+		Chọn các thông tin như customerNumber(rút gọn thành id), salesRepEmployeeNumber(rút gọn thành SREN) từ bảng customers(rút gọn thành table\_1 với điều kiện salesRepEmployeeNumber là NULL.
+	
+	{\bf DISPLAY RESULTS:}
+		\begin{center}
+			\includegraphics[scale=.5]{Tuần 2-4}
+		\end{center}
+\subsection{Bài 5}
+	\begin{center}
+		{\it INNER JOIN, LEFT JOIN, RIGHT JOIN, SELF JOIN, CROSS JOIN}
+	\end{center}
+	
+	{\bf INPUT:}
+	
+	{\bf OUTPUT:}
+	
+	{\bf SOURCE CODE:}
+		\begin{itemize}
+			\item INNER JOIN
+				\begin{lstlisting}
+					SELECT c.customerNumber, c.contactFirstName, o.orderDate
+					FROM customers AS c
+					INNER JOIN orders AS o
+					ON c.customerNumber = o.customerNumber;
+				\end{lstlisting}
+			\item LEFT JOIN
+				\begin{lstlisting}
+					SELECT c.customerNumber, c.contactFirstName, o.orderDate
+					FROM customers AS c
+					LEFT JOIN orders AS o USING(customerNumber);
+				\end{lstlisting}
+			\item RIGHT JOIN
+				\begin{lstlisting}
+					SELECT e.officeCode, e.firstName, e.jobTitle
+					FROM offices AS o
+					RIGHT JOIN employees AS e USING(officeCode);
+				\end{lstlisting}
+			\item SELF JOIN
+				\begin{lstlisting}
+					SELECT e1.employeeNumber,
+						e1.firstName AS employeeName,
+						e2.firstName AS managerName
+					FROM employees AS e1
+					LEFT JOIN employees AS e2
+					ON e2.employeeNumber = e1.reportsTo;
+				\end{lstlisting}
+			\item CROSS JOIN
+				\begin{lstlisting}
+					SELECT o1.officeCode, o2.city
+					FROM offices AS o1
+					CROSS JOIN offices AS o2
+					ORDER BY officeCode;
+				\end{lstlisting}
+		\end{itemize}
+		
+	{\bf ALGORITHM:}
+		\begin{itemize}
+			\item INNER JOIN: Lấy ra từ bảng customer inner join với bảng orders các thông tin như customerNumber, contactFirstName, orderDate với điều kiện join là cột customerNumber.
+			\item LEFT JOIN: Giống như INNER JOIN ở phía trên nhưng thay bằng LEFT JOIN
+			\item RIGHT JOIN: Liên kết bên phải của bảng offices với bảng employees trên cột officeCode rồi lấy ra các thông tin officeCode, firstName và jobTitle.
+			\item SELF JOIN: Lấy ra danh sách nhân viên - quản lý tương ứng bằng cách dùng bảng employees join với chính nó dựa trên 2 cột là employeeNumber và reportsTo.
+			\item CROSS JOIN: Lấy ra các thông tin như officeCode và city từ việc sử dụng tích descart của bảng offices với chính nó và sắp xếp theo officeCode.
+		\end{itemize}
+		
+	{\bf DISPLAY RESULTS:}
+		\begin{itemize}
+			\item INNER JOIN
+				\begin{center}
+					\includegraphics[scale=1]{Tuần 2-5-1}
+				\end{center}
+			\item LEFT JOIN
+				\begin{center}
+					\includegraphics[scale=1]{Tuần 2-5-2}
+				\end{center}
+			\item RIGHT JOIN
+				\begin{center}
+					\includegraphics[scale=1]{Tuần 2-5-3}
+				\end{center}
+			\item SELF JOIN
+				\begin{center}
+					\includegraphics[scale=1]{Tuần 2-5-4}
+				\end{center}
+			\item CROSS JOIN
+				\begin{center}
+					\includegraphics[scale=1]{Tuần 2-5-5}
+				\end{center}
+		\end{itemize}
+\subsection{Bài 6}
+	\begin{center}
+		{\it GROUP BY, HAVING, ROLLUP}
+	\end{center}
+	
+	{\bf INPUT:}
+	
+	{\bf OUTPUT:}
+	
+	{\bf SOURCE CODE:}
+		\begin{lstlisting}
+			SELECT DISTINCT
+				p.productVendor AS brand
+				p.productLine AS category,
+				SUM(quantityOrdered * priceEach) AS sales
+			FROM products AS p
+			INNER JOIN orderdetails AS o USING(productCode)
+			GROUP BY
+				brand, category WITH ROLLUP
+			HAVING sales < 100000;
+		\end{lstlisting}
+		
+	{\bf ALGORITHM:} Từ bảng products join với bảng orderdetails dựa trên cột productCode, lấy ra productVendor(brand), productLine(category) và doanh số ($sales=quantityOrdered\cdot priceEach$). Tất cả được nhóm theo (brand, category) với điều kiện sales < 100000.
+	
+	{\bf DISPLAY RESULTS:}
+		\begin{center}
+			\includegraphics[scale=1]{Tuần 2-6}
+		\end{center}
+\subsection{Bài 7}
+	\begin{center}
+		{\it SUBQUERY, DERIVED TABLES, EXISTS}
+	\end{center}
+	
+	{\bf INPUT:} Kiểm tra xem khách hàng nào có vấn đề trong việc giao nhận hàng.
+	
+	{\bf OUTPUT:} Đưa ra bảng gồm id khách hàng, cột kết quả.
+	
+	{\bf SOURCE CODE:}
+		\begin{lstlisting}
+			SELECT
+				c.customerNumber,
+				(CASE
+					WHEN o.comments IS NULL THEN 'NO'
+					WHEN o.comments IS NOT NULL THEN 'YES'
+				END) AS problems
+			FROM customers AS c
+			JOIN orders AS o USING(customerNumber)
+			WHERE EXISTS (
+				SELECT 1
+				FROM orders
+				GROUP BY customerNumber
+				HAVING COUNT(comments IS NOT NULL) > 4)
+			ORDER BY customerNumber;
+		\end{lstlisting}
+		
+	{\bf ALGORITHM:}
+		\begin{itemize}
+		
+			\item Bước 1: Tạo một derived table
+					
+					Từ bảng orders, nhóm theo customerNumber với điều kiện tổng các comments khác NULL lớn hơn 4.
+			\item Bước 2: Từ bảng customers join với orders trên cột customerNumber, lấy ra customerNumber và cột problems('YES' nếu comment là NULL, 'NO' nếu comment khác NULL). Với điều kiện là hàng chứa customerNumber phải chứa trong derived table ở trên.
+		\end{itemize}
+	
+	{\bf DISPLAY RESULTS:}
+		\begin{center}
+			\includegraphics[scale=1]{Tuần 2-7}
+		\end{center}
+\subsection{Bài 8}
+	\begin{center}
+		{\it UNION, MINUS, INTERSECT}
+	\end{center}
+	
+	{\bf INPUT:}
+		\begin{itemize}
+			\item UNION: Lấy ra tập hợp các giá trị id của bảng customers và bảng orders.
+			\item MINUS: Lấy ra tập hợp các giá trị id của bảng customers sao cho creditLimit nhỏ hơn 100000.
+			\item INTERSECT: Lấy ra tập khách hàng đã thực hiện thanh toán.
+		\end{itemize}
+	
+	{\bf OUTPUT:}
+		\begin{itemize}
+			\item UNION: Một bảng với cột customerNumber.
+			\item MINUS: Một bảng với cột customerNumber.
+			\item INTERSECT: Một bảng với cột customerNumber.
+		\end{itemize}
+	
+	{\bf SOURCE CODE:}
+		\begin{itemize}
+			\item UNION
+				\begin{lstlisting}
+					SELECT customerNumber FROM customers
+					UNION
+					SELECT customerNumber FROM orders;
+				\end{lstlisting}
+			\item MINUS
+				\begin{lstlisting}
+					SELECT c1.customerNumber
+					FROM customers AS c1
+					LEFT JOIN customers AS c2 USING(customerNumber)
+					WHERE c1.creditLimit < 100000
+					ORDER BY customerNumber;
+				\end{lstlisting}
+			\item INTERSECT
+				\begin{lstlisting}
+					SELECT DISTINCT customerNumber
+					FROM customers
+					JOIN payments USING(customerNumber);
+				\end{lstlisting}
+		\end{itemize}
+		
+	{\bf ALGORITHM:}
+		\begin{itemize}
+			\item UNION: Dùng toán tử UNION cho 2 tập customerNumber từ bảng customer và orders.
+			\item MINUS: Dùng left join trên customers vào chính nó dựa trên cột customerNumber với điều kiện creditLimit < 100000.
+			\item INTERSECT: Chọn phân biệt(DISTINCT) customerNumber từ bảng customers join với payments sử dụng cột customerNumber
+		\end{itemize}
+	
+	{\bf DISPLAY RESULTS:}
+		\begin{itemize}
+			\item UNION
+				\begin{center}
+					\includegraphics[scale=1]{Tuần 2-8-1}
+				\end{center}
+			\item MINUS
+				\begin{center}
+					\includegraphics[scale=1]{Tuần 2-8-2}
+				\end{center}
+			\item INTERSECT
+				\begin{center}
+					\includegraphics[scale=1]{Tuần 2-8-3}
+				\end{center}
+		\end{itemize}
+\newpage
+\section{Tuần 3}
+\subsection{Bài 1}
+	\begin{center}
+		{\it Xây dựng lược đồ (Diagram)}
+	\end{center}
+	
+	{\bf INPUT:} Vẽ, đọc và phân tích lược đồ
+	
+	{\bf OUTPUT:} Hiển thị lược đồ trên MySQL Workbench, phân tích lược đồ trên file text.
+
+	{\bf ALGORITHM:} Trong giao diện MySQL Workbench $\Longrightarrow$ Next cho đến khi ra được lược đồ.
+	
+	{\bf DISPLAY RESULTS:}
+		\vskip .5cm
+		\begin{figure}[!h]
+		\subfloat[ER-Diagram]
+  			{\includegraphics[width=.5\linewidth]{Tuần 3-1-1}}\hfill
+		\subfloat[RE-Diagram]
+  			{\includegraphics[width=.5\linewidth]{Tuần 3-1-2}}\hfill
+		\caption{Lược đồ Diagram}
+		\end{figure}
+		\begin{figure}[!h]
+		\begin{center}
+			\includegraphics[scale=.5]{Tuần 3-1-3}\hfill
+			\caption{Phân tích lược đồ}
+		\end{center}
+		\end{figure}
+\subsection{Bài 2}
+	\begin{center}
+		{\it Truy vấn các bảng hệ thống trong CSDL}
+	\end{center}
+	
+	{\bf INPUT:} Truy vấn tên các bảng, các cột của một bảng và tính chất các cột đó.
+	
+	{\bf OUTPUT:} Hiển thị các bảng hệ thống.
+	
+	{\bf SOURCE CODE:}
+		\begin{itemize}
+			\item Truy vấn các bảng hệ thống.
+				\begin{lstlisting}
+					SELECT * FROM information_schema.tables
+					WHERE table_schema = 'classicmodels';
+				\end{lstlisting}
+			\item Truy vấn các cột hệ thống.
+				\begin{lstlisting}
+					SELECT * FROM information_schema.columns
+					WHERE table_schema = 'classicmodels'
+					ORDER BY table_name, ordinal_position;
+				\end{lstlisting}
+		\end{itemize}
+	
+	{\bf DISPLAY RESULTS:}
+	\begin{figure}[!h]
+		\includegraphics[width=\linewidth]{Tuần 3-2-1}\hfill
+		\caption{Các bảng hệ thống}
+		\vskip 1.5cm
+		\includegraphics[width=\linewidth]{Tuần 3-2-2}\hfill
+		\caption{Các cột hệ thống}
+	\end{figure}
+\newpage
+\section{Tuần 4}
+\subsection{Bài 1 và 2}
+	\begin{center}
+		{\it Xây dựng cấu trúc của một cơ sở dữ liệu (Data Definition)}
+	\end{center}
+	
+	{\bf INPUT:} Thiết lập các ràng buộc(PK, UK, Datatype,...) và tạo ra các quan hệ giữa các bảng dữ liệu.
+	
+	{\bf OUTPUT:} Một cơ sở dữ liệu đã được định nghĩa.
+	
+	{\bf SOURCE CODE:}
+		\begin{lstlisting}
+			CREATE DATABASE IF NOT EXISTS musicsmodel;
+			USE musicsmodel;
+			CREATE TABLE IF NOT EXISTS singers (
+				singer_id INT AUTO_INCREMENT PRIMARY KEY,
+    			singer_name VARCHAR(255) NOT NULL,
+   				gender TINYTEXT NULL,
+    			debute_year YEAR NOT NULL,
+    			manager_contact VARCHAR(255),
+    			CONSTRAINT unique_email UNIQUE (manager_contact)
+			) ENGINE = INNODB;
+			
+			CREATE TABLE IF NOT EXISTS songs (
+				song_id INT AUTO_INCREMENT PRIMARY KEY, 
+    			song_name VARCHAR(255) NOT NULL,
+				singer_id INT NOT NULL,
+    			CONSTRAINT sing
+    			FOREIGN KEY (singer_id)
+    			REFERENCES singers (singer_id)
+				ON UPDATE CASCADE
+        		ON DELETE CASCADE
+			)  ENGINE = INNODB;
+		\end{lstlisting}
+	
+	{\bf DISPLAY RESULTS:}
+		\vskip 1cm
+		\begin{center}
+			\includegraphics[width=.5\linewidth]{Tuần 4-(1,2)}
+		\end{center}
+
+\subsection{Bài 3}
+	\begin{center}
+		{\it Thiết lập khung nhìn (Views)}
+	\end{center}
+	
+	{\bf INPUT:} Tạo view cho danh sách những địa chỉ email mà khách hàng có thể liên hệ.
+	
+	{\bf OUTPUT:} Bảng gồm id khách hàng, tên khách hàng và email của nhân viên phục vụ khách hàng.
+	
+	{\bf SOURCE CODE:}
+		\begin{lstlisting}
+			CREATE VIEW cus_emp
+			AS
+				SELECT
+					c.customerNumber,
+					c.customerName,
+					e.email AS email_to
+				FROM 
+					customers AS c
+				INNER JOIN employees AS e
+    			WHERE e.employeeNumber = c.salesRepEmployeeNumber;
+    
+			SELECT * FROM classicmodels.cus_emp;
+		\end{lstlisting}
+		
+	{\bf ALGORITHM:} Từ bảng customers join với bảng employees dựa trên cặp (employeeNumber, salesRepEmployeeNumber), lấy ra thông customerNumber, customerName, email. Rồi tạo view trên bảng đó.
+		
+	{\bf DISPLAY RESULTS:}
+		\begin{center}
+			\includegraphics[scale=.5]{Tuần 4-3}
+		\end{center}			
+	
+\subsection{Bài 4}
+	\begin{center}
+		{\it Thiết lập thủ tục và hàm(Procedures và Function)}
+	\end{center}
+	
+	{\bf INPUT:}
+		\begin{itemize}
+			\item Procedure: Lấy ra tất cả bản ghi của bảng products.
+			\item Function:	Phân loại theo mức giá các sản phẩm.
+		\end{itemize}
+
+	{\bf OUTPUT:}
+		\begin{itemize}
+			\item Procedure: Trả về bảng products.
+			\item Function: Trả về bảng gồm tên sản phẩm và phân khúc sản phẩm tương ứng.
+		\end{itemize}
+
+
+	{\bf ALGORITHM:}
+		\begin{itemize}
+			\item Procedure: Lấy tất cả từ bảng products.
+			\item Function: Tạo hàm ProductSegment với tham số là buyPrice(số thập phân lấy 2 chứ số sau dấu phẩy). Sau đó khai báo biến product\_segment kiểu varchar. Nếu buyPrice $>= 100$ thì product\_segment = 'High', nếu $50 <=$ buyPrice $< 100$ thì product\_segment = 'Middle', còn lại thì product\_segment = 'Low'. Cuối cùng trả về product\_segment.
+		\end{itemize}
+	
+	{\bf SOURCE CODE:}
+		\begin{itemize}
+			\item Procedure:
+				\begin{lstlisting}
+					USE classicmodels;
+
+					DELIMITER $$
+					CREATE PROCEDURE GetAllProducts()
+
+					BEGIN 
+						SELECT * FROM products;
+					END $$
+
+					DELIMITER ;
+
+					CALL GetAllProducts();
+				\end{lstlisting}
+			\item Function:
+				\begin{lstlisting}
+					DELIMITER $$
+					CREATE FUNCTION ProductSegment(
+						buyPrice DECIMAL(10,2)
+						)
+					RETURNS VARCHAR(255)
+					DETERMINISTIC
+					BEGIN 
+						DECLARE product_segment VARCHAR(255);
+    
+						IF buyPrice >= 100 THEN
+							SET product_segment = 'HIGH';
+						ELSEIF (buyPrice >= 50 AND buyPrice < 100) THEN
+							SET product_segment = 'MIDDLE';
+						ELSEIF buyPrice < 50 THEN
+							SET product_segment = 'LOW';
+						END IF;
+    
+						RETURN (product_segment);
+					END $$
+					DELIMITER ;
+					SELECT
+						productName,
+   						ProductSegment(buyPrice)
+					FROM
+						products
+					ORDER BY ProductSegment(buyPrice);
+				\end{lstlisting}
+		\end{itemize}
+	
+	{\bf DISPLAY RESULTS:}
+		\begin{itemize}
+			\item Procedure:
+				\begin{center}
+					\includegraphics[scale=.5]{Tuần 4-4-1}
+				\end{center}
+			\item Function: 
+				\begin{flushleft}
+					\includegraphics[scale=.5]{Tuần 4-4-2}
+				\end{flushleft}
+		\end{itemize}
+\newpage
+\section{Tuần 5}
+\subsection{Bài 1}
+	\begin{center}
+		{\it INSERT, UPDATE, DELETE}
+	\end{center}
+	
+	{\bf INPUT} Sử dụng bảng singers trong CSDL musicsmodels, thêm vào 5 bản ghi, xóa 1 bản ghi có id là 24, cập nhất lại năm sinh của ca sĩ có tên là 'Elvis Presley'.
+	
+	{\bf OUTPUT:} bảng singers đã được thay đổi.
+	
+	{\bf SOURCE CODE:}
+		\begin{lstlisting}
+			USE musicsmodel;
+
+			SET SQL_SAFE_UPDATES = 0;
+
+			DELETE FROM singers
+			WHERE singer_id = 24;
+
+			INSERT INTO 
+				singers(singer_name, gender, birth_year)
+			VALUES 
+				('Ed Sheeran', 'male', 1991),
+        		('Ruel', 'male', 2002),
+       			('Lukas Graham', 'male', 1988),
+        		('James Arthur', 'male', 1988),
+       			('Lewis Capaldi', 'male' , 1996),
+        		('Loran Allred', 'female', 1989),
+        		('Elvis Presley', 'male', 1934);
+
+			UPDATE singers
+			SET
+				birth_year = '1935'
+			WHERE singer_name = 'Elvis Presley';
+
+
+			SELECT * FROM singers;
+		\end{lstlisting}
+		
+	{\bf DISPLAY RESULTS:}
+		\begin{center}
+			\includegraphics[scale=.5]{Tuần 5-1}
+		\end{center}
+\subsection{Bài 2}
+	\begin{center}
+		{\it Sinh tự động SQL script thông qua excel}
+	\end{center}
+	
+	{\bf INPUT:} Dùng phần mềm excel sinh ra các câu lệnh INSERT, UPDATE, DELETE.
+	
+	{\bf OUTPUT:} Trả về các SQL script.
+	
+	{\bf DISPLAY RESULTS:}
+		\begin{itemize}
+			\item INSERT:
+				\begin{center}
+					\includegraphics[width=\linewidth]{Tuần 5-2-1}
+				\end{center}
+			\item UPDATE:
+				\begin{center}
+					\includegraphics[width=\linewidth]{Tuần 5-2-2}
+				\end{center}
+			\item DELETE:
+				\begin{center}
+					\includegraphics[width=\linewidth]{Tuần 5-2-3}
+				\end{center}
+		\end{itemize}
+\subsection{Bài 3}
+	\begin{center}
+		{\it Cập nhật dữ liệu từ một bảng khác}
+	\end{center}
+	
+	{\bf INPUT:} Ở bảng products tăng buyPrice lên 100 lần, với điều kiện là orderLineNumber = 1 và quantityInStock < 3000 trong bảng orderdetails.
+	
+	{\bf OUTPUT:} Bảng products đã được cập nhật.
+	
+	{\bf SOURCE CODE:}
+		\begin{lstlisting}
+			USE classicmodels;
+			
+			SET SQL_SAFE_UPDATES = 0;
+			
+			UPDATE products
+			INNER JOIN orderdetails ON products.productCode = orderdetails.productCode
+			SET
+				buyPrice = buyPrice * 100
+			WHERE
+				quantityInStock < 3000 AND orderLineNumber = 1;
+				
+			SELECT * FROM products;
+		\end{lstlisting}
+		
+	{\bf ALGORITHM:} Sử dụng bảng products join với bảng orderdetails trên cột productCode. Đặt buyPrice=buyPrice$\cdot100$ với điều kiện quantityInStock nhỏ hơn 3000 và orderLineNumber bằng 1.
+	
+	{\bf DISPLAY RESULTS:}
+		\begin{center}
+			\includegraphics[width=\linewidth]{Tuần 5-3}
+		\end{center}
+\subsection{Bài 4}
+	\begin{center}
+		{\it Cập nhật dữ liệu qua một procedure}	
+	\end{center}
+	
+	{\bf INPUT:} Dùng musicsmodel. Tạo một procedure để insert dữ liệu vào bảng singers. Truyền các tham số để cập nhật bảng singers.
+	
+	{\bf OUTPUT:} Bảng singers đã được update.
+	
+	{\bf SOURCE CODE:}
+		\begin{lstlisting}
+			USE musicsmodel;
+			DELIMITER &&
+			CREATE PROCEDURE insertData (IN singer_name varchar(255), IN gender tinytext, IN birth_year year, IN email varchar(255))
+    
+    		BEGIN 
+				INSERT INTO singers (singer_name, gender, debute_year, manager_contact)
+        		VALUES (singer_name, gender, birth_year, email);
+    		END &&
+
+			DELIMITER ;
+
+			CALL insertData ('HieuNguyen', 'female', '2001', 'hieu.nc195016@sis.hust.edu.vn');
+
+			SELECT * FROM singers;
+		\end{lstlisting}
+		
+	{\bf ALGORITHM:} Tạo một procedure tên insertData với các tham số singer\_name, gender, birth\_year, email với các kiểu dữ liệu tương ứng với các cột trong bảng singers. Mỗi lần muốn thêm một bản ghi thì dùng lệnh CALL để gọi đến procedure và truyền vào các tham số tương ứng.
+	
+	{\bf DISPLAY RESULTS:}
+		\begin{center}
+			\includegraphics[scale=.5]{Tuần 5-4}
+		\end{center}
+\subsection{Bài 5}
+	\begin{center}
+		{\it Tự động sinh ra các procedure cập nhật dữ liệu}
+	\end{center}
+	
+	{\bf INPUT:} Có thể tự tạo hoặc dùng các phần mềm thứ 3.
+	
+	{\bf OUTPUT:} Trả về các procedure.
+	
+	{\bf ALGORITHM:} \href{https://www.llblgen.com/pages/try.aspx?fbclid=IwAR1zVfQ_Wl1u3skSk_6MwPPMzrEpesGEHIDsWG02DGN9ShaHMOrnvZBKEu8}{\bf link} phần mềm thứ 3.
+	
+	{\bf DISPLAY RESULTS:}
+		\begin{center}
+			\includegraphics[width=\linewidth]{Tuần 5-5}
+		\end{center}
+
+
+\newpage
+\section{Tuần 6}
+\subsection{Bài 1}
+	\begin{center}
+		{\it Aggregate Functions, Math Functions, Comparison Functions}
+	\end{center}
+	
+	{\bf INPUT:}
+	\begin{itemize}
+		\item Aggregate Functions:
+		\begin{itemize}
+			\item Hàm AVG: Tính giá trung bình của từng dòng sản phẩm.
+			\item Hàm SUM: Tính tổng giá trị số lượng các sản phẩm đã được đặt hàng.
+			\item Hàm MAX: Tìm giá sản phẩm cao nhất của từng dòng sản phẩm
+		\end{itemize}
+		\item Math Function: Kiểm tra số lượng đặt hàng của từng sản phẩm là chẵn hay lẻ.
+		\item Comparison Function: Thay thế các giá trị NULL ở phần comments trong bảng order thành 'There are no comments'.
+	\end{itemize}
+	
+	{\bf OUTPUT:}
+	\begin{itemize}
+		\item Aggregate Functions:
+		\begin{itemize}
+			\item Hàm AVG: Bảng gồm 3 cột productLine, amount và average\_Price.
+			\item Hàm SUM: Bảng gồm 3 cột productCode, productName và total.
+			\item Hàm MAX: Bảng gồm 2 cột productLine và MAX.
+		\end{itemize}
+		\item Math Function: Bảng gồm 3 cột productName, total và OddOrEven.
+		\item Comparison Function: Bảng gồm 2 cột orderNumber và comments.
+	\end{itemize}
+	
+	{\bf SOURCE CODE:}
+	\begin{itemize}
+	\item Aggregate Functions:
+	\begin{itemize}
+		\item Hàm AVG:
+		\begin{lstlisting}
+			SELECT 
+				productLine,
+    			COUNT(*) AS amount,
+    			AVG(buyPrice) AS average_Price
+			FROM 
+				products
+			GROUP BY
+				productLine;
+    	\end{lstlisting}
+    	\item Hàm SUM:
+    	\begin{lstlisting}
+			SELECT
+				productCode,
+    			productName,
+    			SUM(priceEach * quantityOrdered) AS total
+			FROM 
+				orderdetails INNER JOIN products USING (productCode)
+			GROUP BY productCode
+			ORDER BY total;
+		\end{lstlisting}
+		\item Hàm MAX:
+		\begin{lstlisting}
+			SELECT
+				productLine,
+    			MAX(buyPrice)
+				FROM products
+			GROUP BY productLine
+			ORDER BY productLine;
+		\end{lstlisting}	
+	\end{itemize}
+	\item Math Functions:
+		\begin{lstlisting}
+			SELECT 
+    			productName,
+    			SUM(quantityOrdered) AS total,
+    			IF(MOD(SUM(quantityOrdered), 2),
+					'Odd',
+        			'Even') OddOrEven
+				FROM 
+					orderdetails INNER JOIN products USING (productCode)
+				GROUP BY 
+					productCode
+				ORDER BY
+					productCode;
+		\end{lstlisting}
+	
+	\item Comparison Functions:
+		\begin{lstlisting}
+			SELECT
+				orderNumber,
+    			COALESCE(comments, 'There are no comments') comments
+			FROM 
+				orders
+			ORDER BY orderNumber;
+		\end{lstlisting}
+	\end{itemize}
+	
+	{\bf ALGORITHM:}
+	\begin{itemize}
+		\item Aggregate Functions:
+			\begin{itemize}
+				\item Hàm AVG: Từ bảng products, nhóm theo productLine và lấy ra các thông tin như productLine, số lượng các dòng xe, và giá trung bình các dòng xe.
+				\item Hàm SUM: Từ bảng orderdetails join với bảng products trên productCode và nhóm theo productCode. Lấy ra các thông tin như productCode, productName, và tồng tiền các sản phẩm được đặt hàng.
+				\item Hàm MAX: Từ bảng products, nhóm theo productLine, dùng hàm max để tìm sản phẩm có giá cao nhất của mỗi dòng sản phẩm và sắp xếp theo productLine.
+			\end{itemize}
+		\item Math Function: Từ bảng orderdetails join với bảng products sử dụng productCode, nhóm theo productCode. Lấy ra các thông tin về productName, tổng số lượng hàng đặt của mỗi sản phẩm, và xẽm tổng số lượng đó là chẵn hay lẻ('Even' - 'Odd').
+		\item Comparison Function: Từ bảng orders lấy ra orderNumber. Kiểm tra xem nếu comments là NULL thì sẽ thay thế bằng 'There are no comments'.
+	\end{itemize}
+	
+	
+	{\bf DISPLAY RESULTS:}
+		\begin{figure}[h]
+		\subfloat[Hàm AVG]
+  			{\includegraphics[width=.3\linewidth]{Tuần 6-1-1-1}}\hfill
+		\subfloat[Hàm SUM]
+  			{\includegraphics[width=.3\linewidth]{Tuần 6-1-1-2}}\hfill
+		\subfloat[Hàm MAX]
+  			{\includegraphics[width=.3\linewidth]{Tuần 6-1-1-3}}\hfill
+		\caption{Aggregate Functions}
+		\end{figure}
+		
+		\begin{figure}[h]
+		\subfloat[Hàm MOD]
+  			{\includegraphics[width=.4\linewidth]{Tuần 6-1-2}}\hfill
+		\subfloat[Hàm COALESCE]
+  			{\includegraphics[width=.4\linewidth]{Tuần 6-1-3}}\hfill
+		\caption{Math \& Comparison Function}
+		\end{figure}
+\subsection{Bài 2}
+	\begin{center}
+		{\it Control Flow Functions and Expressions}
+	\end{center}
+	
+	{\bf INPUT:} Thực hiện 2 truy vấn. Thứ nhất, tìm ra sức mua của từng khách hàng. Thứ hai, đếm những trạng thái(status) trong bảng orders.
+	
+	{\bf OUTPUT:}
+	\begin{itemize}
+		\item Truy vấn thứ nhất, là bảng gồm 3 cột customerName, orderCount và customerType.
+		\item Truy vấn thứ hai, là bảng gồm 6 cột cancelled, disputed, inprogress, onhold, resolved, shipped.
+	\end{itemize}
+	{\bf SOURCE CODE:}
+		\begin{lstlisting}
+			WITH cte AS (
+				SELECT
+						customerName,
+            		COUNT(*) orderCount
+				FROM 
+					orders INNER JOIN customers USING (customerNumber)
+				GROUP BY customerName
+				)
+
+			SELECT
+				customerName,
+    			orderCount,
+    			CASE orderCount
+						WHEN 1 THEN 'One-time customer'
+            		WHEN 2 THEN 'Repeated customer'
+            		WHEN 3 THEN 'Frequent customer'
+            		ELSE 'Loyal customer'
+            		END AS customerType
+			FROM 
+				cte
+			ORDER BY customerName;
+
+			SELECT
+				COUNT(IF(status = 'Cancelled', 1, NULL)) as cacelled,
+    			COUNT(IF(status = 'Disputed', 1, NULL)) as disputed,
+    			COUNT(IF(status = 'In Process', 1, NULL)) as inprogress,
+    			COUNT(IF(status = 'On Hold', 1, NULL)) as onhold,
+    			COUNT(IF(status = 'Resolved', 1, NULL)) as resolved,
+   			COUNT(IF(status = 'Shipped', 1, NULL)) as shipped
+			FROM 
+				orders;
+		\end{lstlisting}
+	
+	{\bf ALGORITHM:}
+	\begin{itemize}
+		\item Bước 1: Tạo một truy vấn con cte từ bảng orders join với customers trên customerNumber và nhóm theo customerName. Sau đó lấy ra các thông tin như customerName, orderCount(= số order của một khách hàng).
+		\item Bước 2: Thực hiện truy vấn đầu tiên. Từ bảng cte lấy ra các cột customerName, orderCount, và customertype. Ở cột customerType sẽ nhận 4 giá trị 'One-time customer' nếu orderCount bằng 1, 'Repeated customer' nếu orderCount bằng 2, 'Frequent customer' nếu orderCount bằng 3, còn lại sẽ là 'Loyal customer'.
+		\item Bước 3: Thực hiện truy vấn thứ 2. Từ bảng orders, đếm những giá trị giống nhau ở cột status và cho vào những cột tương ứng.
+	\end{itemize}
+	
+	{\bf DISPLAY RESULTS:}
+		\begin{figure}[h]
+		\subfloat[Truy vấn thứ nhất]
+  			{\includegraphics[width=.4\linewidth]{Tuần 6-2-1}}\hfill
+		\subfloat[Truy vấn thứ hai]
+  			{\includegraphics[width=.4\linewidth]{Tuần 6-2-2}}\hfill
+		\caption{Các truy vấn}
+		\end{figure}
+\subsection{Bài 3}
+	\begin{center}
+		{\it Window Functions}
+	\end{center}
+	
+	{\bf INPUT:} Xếp bậc của khách hàng theo từng năm dựa trên số tiền thanh toán của khách hàng.
+	
+	{\bf OUTPUT:} Một bảng gồm các cột customerNumber, customerName, pay\_year, amount, pay\_rank.
+	
+	{\bf SOURCE CODE:}
+	\begin{lstlisting}
+		SELECT
+			customerNumber,
+			customerName,
+    		YEAR(paymentDate) AS pay_year,
+    		amount,
+    		DENSE_RANK() OVER (PARTITION BY YEAR(paymentDate) ORDER BY amount DESC) AS pay_rank
+		FROM
+			payments INNER JOIN customers USING (customerNumber);
+	\end{lstlisting}
+	
+	{\bf ALGORITHM:} Từ bảng payments join với bảng customers trên customerNumber. Lấy các thông tin như customerNumber, customerName, pay\_year, pay\_rank. Trong đó, pay\_year là năm thanh toán, pay\_rank được xác định qua mức giảm dần của amount và phân vùng theo năm.
+	
+	{\bf DISPLAY RESULTS:}
+	\begin{center}
+		\includegraphics[width=.5\linewidth]{Tuần 6-3}
+	\end{center}
+\subsection{Bài 4}
+	\begin{center}
+		{\it Date Functions, String Functions}
+	\end{center}
+	
+	{\bf INPUT:}
+	\begin{itemize}
+		\item Date Functions: Thực hiện 2 truy vấn. Thứ nhất, tìm ra số ngày để sản phẩm được giao đến khách hàng. Thứ hai, tìm ra số lượt order trong các ngày trong tuần vào năm 2004.
+		\item String Function: Tổng số tiền thu được khi bán một sản phẩm(stock\_value).
+	\end{itemize}
+	
+	{\bf OUTPUT:}
+	\begin{itemize}
+		\item Date Functions:
+			\begin{itemize}
+				\item Hàm DATEDIFF: Một bảng gồm 3 cột orderNumber, customerName, time\_cost.
+				\item Hàm DAYNAME: Một bảng gồm 2 cột weekday, total\_order.
+			\end{itemize}
+		\item String Functions: Một bảng gồm 2 cột productName, stock\_value.
+	\end{itemize}
+	
+	{\bf SOURCE CODE:}
+	\begin{itemize}
+		\item Date Functions:
+			\begin{lstlisting}
+				SELECT
+					orderNumber,
+    				customerName,
+    				DATEDIFF(requiredDate, shippedDate) AS time_cost
+				FROM
+					orders INNER JOIN customers USING (customerNumber);
+    
+				SELECT
+					DAYNAME(orderDate) AS weekday,
+    				COUNT(*) AS total_order
+				FROM
+					orders
+				WHERE
+					YEAR(orderDate) = 2004
+				GROUP BY weekday
+				ORDER BY weekday;
+			\end{lstlisting}
+		\item String Functions;
+			\begin{lstlisting}
+				SELECT
+					productName,
+					CONCAT('$' , FORMAT(SUM(quantityOrdered * priceEach), 2)) AS stock_value
+				FROM
+					orderdetails INNER JOIN products USING (productCode)
+				GROUP BY productName
+				ORDER BY productName;
+			\end{lstlisting}
+	\end{itemize}
+	
+	{\bf ALGORITHM:}
+	\begin{itemize}
+		\item Date Functions:
+		\begin{itemize}
+			\item Hàm DATEDIFF: Từ bảng orders join với bảng customers trên customerNumber, lấy ra orderNumber, customerName và time\_cost. Trong đó, time\_cost số ngày từ requireDate đến shippeDate.
+			\item Hàm DAYNAME: Từ bảng orders, lấy ra các ngày trong orderDate và dùng hàm count để đếm xem có bao nhiêu lượt order trong mỗi ngày(dùng group by) với điều kiện năm đang xét là 2014.
+		\end{itemize}
+		\item String Function: Từ bảng orderdetails join với products trên productCode, nhóm theo productName, lấy ra các cột như productName, stock\_value. Trong đó stock\_value được xác định bởi ký hiệu \$ và tổng của số tiền phải thanh toán(quantityOrdered*priceEach) làm tròn đến 2 chữ số sau dấu phẩy và sắp xếp theo productName.
+	\end{itemize}
+	
+	{\bf DISPLAY RESULTS:}
+		\begin{figure}[h]
+		\subfloat[Hàm DATEDIFF]
+  			{\includegraphics[width=.4\linewidth]{Tuần 6-4-1-1}}\hfill
+		\subfloat[Hàm DAYNAME]
+  			{\includegraphics[width=.4\linewidth]{Tuần 6-4-1-2}}\hfill
+		\caption{Date Functions}
+		\end{figure}
+		\begin{figure}[!h]
+			\includegraphics[width=\linewidth]{Tuần 6-4-2}
+			\caption{String Functions}
+		\end{figure}
+\subsection{Bài 5 và 6}
+	\begin{center}
+		{\it Đánh chỉ mục dữ liệu}
+	\end{center}
+	
+	{\bf INPUT:} Thực hiện truy vấn trên cùng một query để so sánh thời gian trước khi indexing và sau khi indexing.
+	
+	{\bf OUTPUT:} Bảng đã được đánh chỉ mục
+	
+	
+	{\bf SOURCE CODE:}
+	\begin{itemize}
+		\item Before indexing
+		\begin{lstlisting}
+			EXPLAIN SELECT * FROM customers
+			WHERE customerName = 'Corrida Auto Replicas, Ltd';
+		\end{lstlisting}
+		\item After indexing
+		\begin{lstlisting}
+			CREATE INDEX customerName ON customers(customerName);
+
+			EXPLAIN SELECT * FROM customers
+			WHERE customerName = 'Corrida Auto Replicas, Ltd';
+		\end{lstlisting}
+	\end{itemize}
+	
+	{\bf ALGORITHM:}
+	
+	
+	{\bf DISPLAY RESULTS:}
+		\begin{figure}[h]
+		\subfloat[Truóc khi indexing]
+  			{\includegraphics[width=.4\linewidth]{Tuần 6-5-1}}\hfill
+		\subfloat[Sau khi indexing]
+  			{\includegraphics[width=.4\linewidth]{Tuần 6-5-2}}\hfill
+		\caption{INDEXING}
+		\end{figure}
+\newpage
+\section{Tuần 7}
+\subsection{Bài 1,2,3,4}
+	\begin{center}
+		{\it Thiết kế CSDL lưu trữ đơn hàng}
+	\end{center}
+	
+	{\bf INPUT:} Xây dựng lược đồ ER, RE.
+	
+	{\bf OUTPUT:} Tạo được CSDL lưu trữ đơn hàng.
+	
+	{\bf SOURCE CODE:}
+	\begin{lstlisting}
+		SET AUTOCOMMIT = OFF;
+		START TRANSACTION;
+		CREATE DATABASE IF NOT EXISTS week7;
+		USE week7;
+
+		CREATE TABLE nguoi_dat_hang
+		(
+			MaKhachHang INT AUTO_INCREMENT PRIMARY KEY,
+    		Ten VARCHAR(40) NOT NULL,
+    		SDT VARCHAR(15) NOT NULL
+		);
+
+		CREATE TABLE don_dat_hang
+		(
+			MaDonHang INT AUTO_INCREMENT PRIMARY KEY,
+    		MaKhachHang INT,
+    		NgayDatHang DATE NOT NULL,
+   			DiaChiGiaoHang VARCHAR(255) NOT NULL
+		);
+
+		CREATE TABLE chi_tiet
+		(
+			MaDonHang INT,
+    		ID_sp INT,
+    		SoLuong INT NOT NULL,
+    		PRIMARY KEY (MaDonHang, ID_sp)
+		);
+
+		CREATE TABLE mat_hang
+		(
+			ID INT AUTO_INCREMENT PRIMARY KEY,
+    		TenHang VARCHAR(100) NOT NULL,
+    		Mota VARCHAR(255),
+    		DonVi VARCHAR(20) NOT NULL,
+    		Gia DECIMAL(10, 2) NOT NULL
+		);
+
+		ALTER TABLE don_dat_hang
+		ADD CONSTRAINT MA_KH FOREIGN KEY (MaKhachHang) REFERENCES nguoi_dat_hang (MaKhachHang);
+
+		ALTER TABLE chi_tiet
+		ADD CONSTRAINT fkof1 FOREIGN KEY (MaDonHang) REFERENCES don_dat_hang (MaDonHang),
+ADD CONSTRAINT fkof2 FOREIGN KEY (ID_sp) REFERENCES mat_hang (ID);
+
+		COMMIT;
+	\end{lstlisting}
+	
+	{\bf ALGORITHM:}
+	
+	{\bf DISPLAY RESULTS:}
+		\begin{figure}[h]
+		\subfloat[Diagram]
+  			{\includegraphics[width=.3\linewidth]{Tuần 7-1-1}}\hfill
+		\subfloat[RE Diagram]
+  			{\includegraphics[width=.3\linewidth]{Tuần 7-1-2}}\hfill
+  		\subfloat[ER Diagram]
+  			{\includegraphics[width=.3\linewidth]{Tuần 7-1-3}}\hfill
+		\caption{Diagram}
+		\end{figure}
+\subsection{Bài 5}
+	\begin{center}
+		{\it Viết câu lệnh thêm dữ liệu vào bảng}
+	\end{center}
+	
+	{\bf INPUT:}
+	{\bf OUTPUT:} Bảng đã được thêm dữ liệu
+	{\bf SOURCE CODE:}
+	\begin{lstlisting}
+		USE week7;
+		SET AUTOCOMMIT = OFF;
+		START TRANSACTION;
+
+		INSERT INTO nguoi_dat_hang
+		VALUES
+		(1, 'Nguyen Van An', 987654321),
+		(2, 'Nguyen Thi B', 123456789),
+		(3, 'Hoang Linh Chi', 982158434);
+
+		INSERT INTO don_dat_hang
+		VALUES 
+		(123, 1, '2009-11-18', '111 Nguyen Trai, Thanh Xuan, Ha Noi'),
+		(456, 2, '2009-10-05', 'khong biet'),
+		(789, 3, '2009-09-17', 'khong co');
+
+		INSERT INTO mat_hang
+		VALUES
+		(1, 'May tinh T450', 'May nhap moi', 'Chiec', 1000),
+		(2, 'Dien thoai Nokia5670', 'Dien thoai dang hot', 'Chiec', 200),
+		(3, 'May in Samsung450', 'May in dang e', 'Chiec', 100);
+
+		INSERT INTO chi_tiet
+		VALUES
+		(123, 1, 1),
+		(123, 2, 2),
+		(123, 3, 1),
+		(456, 1, 50),
+		(456, 2, 60),
+		(789, 1, 10),
+		(789, 2, 5),
+		(789, 3, 150);
+
+		COMMIT;
+	\end{lstlisting}
+	{\bf ALGORITHM:}
+	{\bf DISPLAY RESULTS:}
+		\begin{center}
+			\includegraphics[scale=1]{Tuần 7-5}
+		\end{center}
+\subsection{Bài 6}
+	\begin{center}
+		{\it Viết câu lệnh truy vấn}
+	\end{center}
+	
+	{\bf INPUT:}
+		\begin{center}
+			\includegraphics[width=\linewidth]{Tuần 7-6}
+		\end{center}
+	{\bf OUTPUT:}
+	
+	{\bf SOURCE CODE:}
+	\begin{itemize}
+		\item Truy vấn 1
+		\begin{lstlisting}
+			SELECT TenHang
+			FROM mat_hang
+			INNER JOIN chi_tiet ON mat_hang.ID = chi_tiet.ID_sp
+			WHERE chi_tiet.MaDonHang = 123;
+		\end{lstlisting}
+		\item Truy vấn 2
+		\begin{lstlisting}
+			SELECT MaDonHang, TenHang
+			FROM chi_tiet
+			INNER JOIN mat_hang ON chi_tiet.ID_sp = mat_hang.ID;
+		\end{lstlisting}
+		\item Truy vấn 3
+		\begin{lstlisting}
+			SELECT * FROM don_dat_hang;
+		\end{lstlisting}
+		\item Truy vấn 4
+		\begin{lstlisting}
+			SELECT TenHang
+			FROM mat_hang;
+		\end{lstlisting}
+		\item Truy vấn 5
+		\begin{lstlisting}
+			SELECT * FROM nguoi_dat_hang
+			INNER JOIN don_dat_hang ON nguoi_dat_hang.MaKhachHang = don_dat_hang.MaKhachHang;
+		\end{lstlisting}
+		\item Truy vấn 6
+		\begin{lstlisting}
+			SELECT tenhang
+			FROM mat_hang
+			ORDER BY tenhang DESC;
+		\end{lstlisting}
+		\item Truy vấn 7
+		\begin{lstlisting}
+			SELECT c1.Ten, c4.TenHang
+			FROM nguoi_dat_hang AS c1
+			INNER JOIN don_dat_hang AS c2
+			INNER JOIN chi_tiet AS c3
+			INNER JOIN mat_hang AS c4
+			ON c1.MaKhachHang = c2.MaKhachHang AND c2.MaDonHang = c3.MaDonHang AND c3.ID_sp = c4.ID
+			WHERE Ten = 'Nguyen Van An';
+		\end{lstlisting}
+		\item Truy vấn 8
+		\begin{lstlisting}
+			SELECT COUNT(*) AS SoKhachHang
+			FROM nguoi_dat_hang;
+		\end{lstlisting}
+		\item Truy vấn 9
+		\begin{lstlisting}
+			SELECT COUNT(*)
+			FROM mat_hang;
+		\end{lstlisting}
+		\item Truy vấn 10
+		\begin{lstlisting}
+			SELECT MaDonHang, SUM(c2.Gia * c1.SoLuong) AS ThanhTien
+			FROM chi_tiet AS c1
+			INNER JOIN mat_hang AS c2 ON c1.ID_sp = c2.ID
+			WHERE c1.MaDonHang = 123;
+		\end{lstlisting}
+		\item Truy vấn 11
+		\begin{lstlisting}
+			SELECT MaDonHang, SUM(Gia*SoLuong) AS ThanhTien
+			FROM chi_tiet AS c1
+			INNER JOIN mat_hang AS c2 ON c1.ID_sp = c2.ID
+			GROUP BY c1.MaDonHang;
+		\end{lstlisting}
+		\item Truy vấn 12
+		\begin{lstlisting}
+			SELECT *
+			FROM don_dat_hang AS c1
+			INNER JOIN nguoi_dat_hang AS c2 USING (MaKhachHang);
+		\end{lstlisting}
+	\end{itemize}
+	
+	{\bf ALGORITHM:}
+	
+	{\bf DISPLAY RESULTS:}
+		\begin{itemize}
+			\item Truy vấn 1
+				\begin{center}
+					\includegraphics[scale=1]{Tuần 7-6-1}
+				\end{center}
+			\item Truy vấn 2
+				\begin{center}
+					\includegraphics[scale=1]{Tuần 7-6-2}
+				\end{center}
+			\item Truy vấn 3
+				\begin{center}
+					\includegraphics[scale=1]{Tuần 7-6-3}
+				\end{center}
+			\item Truy vấn 4
+				\begin{center}
+					\includegraphics[scale=1]{Tuần 7-6-4}
+				\end{center}
+			\item Truy vấn 5
+				\begin{center}
+					\includegraphics[scale=1]{Tuần 7-6-5}
+				\end{center}
+			\item Truy vấn 6
+				\begin{center}
+					\includegraphics[scale=1]{Tuần 7-6-6}
+				\end{center}
+			\item Truy vấn 7
+				\begin{center}
+					\includegraphics[scale=1]{Tuần 7-6-7}
+				\end{center}
+			\item Truy vấn 8
+				\begin{center}
+					\includegraphics[scale=1]{Tuần 7-6-8}
+				\end{center}
+			\item Truy vấn 9
+				\begin{center}
+					\includegraphics[scale=1]{Tuần 7-6-9}
+				\end{center}
+			\item Truy vấn 10
+				\begin{center}
+					\includegraphics[scale=1]{Tuần 7-6-10}
+				\end{center}
+			\item Truy vấn 11
+				\begin{center}
+					\includegraphics[scale=1]{Tuần 7-6-11}
+				\end{center}
+			\item Truy vấn 12
+				\begin{center}
+					\includegraphics[scale=1]{Tuần 7-6-12}
+				\end{center}
+		\end{itemize}
+\subsection{Bài 7}
+	\begin{center}
+		{\it Thay đổi cấu trúc CSDL}
+	\end{center}
+	
+	{\bf INPUT:}
+	\begin{center}
+		\includegraphics[scale=1]{Tuần 7-7}
+	\end{center}
+	
+	{\bf OUTPUT:}
+	
+	{\bf SOURCE CODE:}
+	\begin{itemize}
+		\item 1 và 2:
+		\begin{lstlisting}
+			USE week7;
+			ALTER TABLE nguoi_dat_hang
+			MODIFY SDT VARCHAR(30) NOT NULL;
+
+			ALTER TABLE mat_hang
+			MODIFY Gia INT UNSIGNED;
+		\end{lstlisting}
+		\item 3:
+		\begin{lstlisting}
+			DELIMITER $$
+
+			CREATE TRIGGER date_check_1
+			BEFORE INSERT ON don_dat_hang FOR EACH ROW
+			BEGIN
+				IF NEW.NgayDatHang >= CURDATE()
+					THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid Date!';
+				ELSE 
+					INSERT INTO mat_hang
+        			VALUES (NEW.MaDonHang, NEW.MaKhachHang, NEW.NgayDatHang, NEW.DiaChiGiaoHang);
+				END IF;
+    
+			END $$
+
+			DELIMITER ;
+		\end{lstlisting}
+	\end{itemize}
+	
+	{\bf ALGORITHM:} Ở câu 3, dùng trigger để trước khi insert dữ liệu vào bảng, ta sẽ kiểm tra xem ngày đặt của nó có nhỏ hơn ngày hiện tại không, nếu không thì in ra output là 'Invalid Date!', nếu thỏa mãn thì sẽ insert vào.
+	
+	{\bf DISPLAY RESULTS:}
+	\begin{center}
+		\includegraphics[width=\linewidth]{Tuần 7-7-3}
+	\end{center}
+
+\section{Tuần 8}
+\subsection{Bài 1}
+	\begin{center}
+		\includegraphics[width=\linewidth]{Tuần 8-1}
+	\end{center}
+	
+	{\bf INPUT:} U = \{A,B,C,D,E,G\} và F = \{$AB\rightarrow C,AC\rightarrow D,D\rightarrow EG,G\rightarrow B,A\rightarrow D,CG\rightarrow A$\}
+	
+	{\bf OUTPUT:}
+	\begin{itemize}
+		\item a, $AB\rightarrow E$ và $AD\rightarrow BC$.
+		\item b, $\{A\}^+$.
+		\item c, Một phủ tối thiểu của F.
+	\end{itemize}
+	
+	{\bf SOURCE CODE:}
+	
+	{\bf ALGORITHM:}
+	\begin{itemize}
+		\item a, Dựa các các tiên đề Armstrong và hệ quả.
+		\item b, Đặt $X_0$ = A và G = F. Dựa vào các phụ thuộc hàm ta thêm vào các thuộc tính chưa có vào $X_0$. Sau mỗi lần dùng một PTH ta loại nó ra khỏi G. Cuối cùng khi loại bỏ hết PTH hoặc không thể thêm được nữa ta có $X_0$ là bao đóng cần tìm.
+		\item c, Gồm 3 bước. Bước 1: Tách F sao cho vế phải chỉ còn 1 thuộc tính. Bước 2: Bỏ các thuộc tính dư thừa ở vế trái. Bước 3: Loại bỏ các PTH dư thừa. 
+	\end{itemize}
+
+	{\bf DISPLAY RESULTS:}
+		\begin{figure}[!h]
+		\subfloat[Phần 1]
+  			{\includegraphics[width=.4\linewidth]{Tuần 8-1-1}}\hfill
+		\subfloat[Phần 2]
+  			{\includegraphics[width=.4\linewidth]{Tuần 8-1-2}}\hfill
+		\subfloat[Phần 3]
+  			{\includegraphics[width=.4\linewidth]{Tuần 8-1-3}}\hfill
+		\subfloat[Phần 4]
+  			{\includegraphics[width=.4\linewidth]{Tuần 8-1-4}}\hfill
+		\caption{Bài 1 (\href{https://drive.google.com/drive/folders/18bppOD8kB9FX16mTBPA5vzgMh5qRWkda}{\bf Link})}
+		\end{figure}
+	
+
+
+\subsection{Bài 2}
+	\begin{center}
+		\includegraphics[width=\linewidth]{Tuần 8-2}
+	\end{center}
+
+	{\bf INPUT:} U = \{A,B,C,D,E,G,H\} và F = \{$A\rightarrow C,AB\rightarrow G,B\rightarrow DE,G\rightarrow H,GH\rightarrow A$\}
+	
+	{\bf OUTPUT:}
+	\begin{itemize}
+		\item a, $AB\rightarrow H$ và $G\rightarrow C$.
+		\item b, $\{G\}^+$.
+	\end{itemize}
+	
+	{\bf SOURCE CODE:}
+	
+	{\bf ALGORITHM:}
+	\begin{itemize}
+		\item a, Dựa các các tiên đề Armstrong và hệ quả.
+		\item b, Đặt $X_0$ = G và I = F. Dựa vào các phụ thuộc hàm ta thêm vào các thuộc tính chưa có vào $X_0$. Sau mỗi lần dùng một PTH ta loại nó ra khỏi I. Cuối cùng khi loại bỏ hết PTH hoặc không thể thêm được nữa ta có $X_0$ là bao đóng cần tìm. 
+	\end{itemize}
+
+	{\bf DISPLAY RESULTS:}
+		\begin{figure}[!h]
+		\subfloat[Phần 1]
+  			{\includegraphics[width=\linewidth]{Tuần 8-2-1}}\hfill
+		\caption{Bài 2 (\href{https://drive.google.com/drive/folders/18bppOD8kB9FX16mTBPA5vzgMh5qRWkda}{\bf Link})}
+		\end{figure}
+
+\subsection{Bài 3}
+	\begin{center}
+		\includegraphics[width=\linewidth]{Tuần 8-3}
+	\end{center}
+
+	{\bf INPUT:} U = \{G,H,I,K,L,M\} và F = \{$GH\rightarrow L,I\rightarrow M,L\rightarrow K,HM\rightarrow G,GK\rightarrow I,H\rightarrow L$\}
+	
+	{\bf OUTPUT:}
+	\begin{itemize}
+		\item a, $HI\rightarrow G$ và $GH\rightarrow KM$.
+		\item b, $\{GH\}^+$.
+		\item c, Một phủ tối thiểu của F.
+	\end{itemize}
+	
+	{\bf SOURCE CODE:}
+	
+	{\bf ALGORITHM:}
+	\begin{itemize}
+		\item a, Dựa các các tiên đề Armstrong và hệ quả.
+		\item b, Đặt $X_0$ = GH và A = F. Dựa vào các phụ thuộc hàm ta thêm vào các thuộc tính chưa có vào $X_0$. Sau mỗi lần dùng một PTH ta loại nó ra khỏi A. Cuối cùng khi loại bỏ hết PTH hoặc không thể thêm được nữa ta có $X_0$ là bao đóng cần tìm.
+		\item c, Gồm 3 bước. Bước 1: Tách F sao cho vế phải chỉ còn 1 thuộc tính. Bước 2: Bỏ các thuộc tính dư thừa ở vế trái. Bước 3: Loại bỏ các PTH dư thừa. 
+	\end{itemize}
+
+	{\bf DISPLAY RESULTS:}
+		\begin{figure}[!h]
+		\subfloat[Phần 1]
+  			{\includegraphics[width=.3\linewidth]{Tuần 8-3-1}}\hfill
+		\subfloat[Phần 2]
+  			{\includegraphics[width=.3\linewidth]{Tuần 8-3-2}}\hfill
+		\caption{Bài 3 (\href{https://drive.google.com/drive/folders/18bppOD8kB9FX16mTBPA5vzgMh5qRWkda}{\bf Link})}
+		\end{figure}
+
+
+\subsection{Bài 4}
+	\begin{center}
+		\includegraphics[width=\linewidth]{Tuần 8-4}
+	\end{center}
+	
+	{\bf INPUT:} U = \{H,I,K,L,M,N\} và F = \{$I\rightarrow LM,HI\rightarrow K,K\rightarrow N,KN\rightarrow I$\}
+	
+	{\bf OUTPUT:}
+	\begin{itemize}
+		\item a, Một khóa tối thiểu của R.
+		\item b, Kết luận tính mất mát thông tin của R sau khi tách.
+		\item c, Chuẩn hóa về dạng 3NF.
+	\end{itemize}
+	
+	{\bf SOURCE CODE:}
+	
+	{\bf ALGORITHM:}
+	\begin{itemize}
+		\item a, Xác định tập nguồn $P = U - \{LMKNI\}=\{H\}$. Tìm $\{H\}^+$ = $\{H\}$ $\Rightarrow$ khóa có nhiều hơn 1 thuộc tính. Xác định các $\{HI\}^+,\{HK\}^+,\{HL\}^+,\{HM\}^+,\{HN\}^+$. Nếu bằng U thì là khóa.
+		\item b,
+		\begin{itemize}
+			\item Bước 1: xây dựng bảng gồm 6 cột, 3 hàng với cột j tương ứng với thuộc tính $U_j$ và hàng i tương ứng với sơ đồ $R_i$. Tại hàng i, cột j, nếu $U_j$ thuộc $R_i$ thi ta điền $a_j$ ngược lại điền $b_{ij}$.
+			\item Bước 2: Xét lần lượt các PTH và áp dụng cho bảng vừa dựng. Giả sử xét PTH X $\longleftrightarrow$ Y. Nếu tồn tại hai hàng mà tất cả các cột tương ứng với các thuộc tính của Y cũng có giá trị như nhau trong 2 hàng đó theo nguyên tắc:
+			\begin{itemize}
+				\item Nếu có 1 ký hiệu $a_j$ trong các cột ứng với các thuộc tính Y thì đồng nhất các kí hiệu là $a_j$.
+				\item Nếu không thì đồng nhất bằng 1 trong các kí hiệu $b_{ij}$.
+			\end{itemize}
+			\item Bước 3: Tiếp tục áp dụng các PTH cho bảng (kể cả việc lặp lại các PTH đã áp dụng) cho tới khi không thể thay đổi đưuọc giá trị nào trong bảng.
+			\item Bước 4: Nếu trong bảng có 1 hàng gồm các kí hiệu $a_1,a_2,...a_6$ thì phép tách là không mất thông tin. Ngược lại thì phép tách không bảo toàn thông tin.
+		\end{itemize}
+		\item c, Đây là bài toán đi tìm PTH đã xét ở Bài 3.
+	\end{itemize}
+
+	{\bf DISPLAY RESULTS:}
+		\begin{figure}[!h]
+		\subfloat[Phần 1]
+  			{\includegraphics[width=.4\linewidth]{Tuần 8-4-1}}\hfill
+		\subfloat[Phần 2]
+  			{\includegraphics[width=.4\linewidth]{Tuần 8-4-2}}\hfill
+		\subfloat[Phần 3]
+  			{\includegraphics[width=.4\linewidth]{Tuần 8-4-3}}\hfill
+		\caption{Bài 4 (\href{https://drive.google.com/drive/folders/18bppOD8kB9FX16mTBPA5vzgMh5qRWkda}{\bf Link})}
+		\end{figure}
+
+
+\subsection{Bài 5}
+	\begin{center}
+		\includegraphics[width=\linewidth]{Tuần 8-5}
+	\end{center}
+
+	{\bf INPUT:} U = \{A,B,C,D,E,F,G,H\} và F = \{$A\rightarrow C,AB\rightarrow G,B\rightarrow DE,G\rightarrow H,GH\rightarrow A$\}
+	
+	{\bf OUTPUT:}
+	\begin{itemize}
+		\item a, Một khóa tối thiểu của R.
+		\item b, Kết luận tính mất mát thông tin của R sau khi tách.
+		\item c, Chuẩn hóa về dạng 3NF.
+	\end{itemize}
+	
+	{\bf SOURCE CODE:}
+	
+	{\bf ALGORITHM:}
+	\begin{itemize}
+		\item a, Xác định tập nguồn $P = U - \{ACDGH\}=\{B\}$. Tìm $\{B\}^+$ = $\{BDE\}$ $\Rightarrow$ khóa có nhiều hơn 1 thuộc tính. Xác định các $\{BA\}^+,\{BG\}^+$. Nếu bằng U thì là khóa.
+		\item b,
+		\begin{itemize}
+			\item Bước 1: xây dựng bảng gồm 7 cột, 3 hàng với cột j tương ứng với thuộc tính $U_j$ và hàng i tương ứng với sơ đồ $R_i$. Tại hàng i, cột j, nếu $U_j$ thuộc $R_i$ thi ta điền $a_j$ ngược lại điền $b_{ij}$.
+			\item Bước 2: Xét lần lượt các PTH và áp dụng cho bảng vừa dựng. Giả sử xét PTH X $\longleftrightarrow$ Y. Nếu tồn tại hai hàng mà tất cả các cột tương ứng với các thuộc tính của Y cũng có giá trị như nhau trong 2 hàng đó theo nguyên tắc:
+			\begin{itemize}
+				\item Nếu có 1 ký hiệu $a_j$ trong các cột ứng với các thuộc tính Y thì đồng nhất các kí hiệu là $a_j$.
+				\item Nếu không thì đồng nhất bằng 1 trong các kí hiệu $b_{ij}$.
+			\end{itemize}
+			\item Bước 3: Tiếp tục áp dụng các PTH cho bảng (kể cả việc lặp lại các PTH đã áp dụng) cho tới khi không thể thay đổi đưuọc giá trị nào trong bảng.
+			\item Bước 4: Nếu trong bảng có 1 hàng gồm các kí hiệu $a_1,a_2,...a_6$ thì phép tách là không mất thông tin. Ngược lại thì phép tách không bảo toàn thông tin.
+		\end{itemize}
+		\item c, Đây là bài toán đi tìm PTH đã xét ở Bài 3.
+	\end{itemize}
+
+	{\bf DISPLAY RESULTS:}
+		\begin{figure}[!h]
+		\subfloat[Phần 1]
+  			{\includegraphics[width=.4\linewidth]{Tuần 8-5-1}}\hfill
+		\subfloat[Phần 2]
+  			{\includegraphics[width=.4\linewidth]{Tuần 8-5-2}}\hfill
+		\caption{Bài 5 (\href{https://drive.google.com/drive/folders/18bppOD8kB9FX16mTBPA5vzgMh5qRWkda}{\bf Link})}
+		\end{figure}
+
+
+\newpage
+\subsection{Bài 6}
+	\begin{center}
+		{\it Giống bài 5}
+	\end{center}
+
+	\includegraphics[width=\linewidth]{Tuần 8-6-1}
+
+\newpage
+\section{Tuần 9}
+\subsection{Bài 1}
+	\begin{center}
+		{\it Start, Stop, and Restart MySQL Server}
+	\end{center}
+	
+	{\bf SOURCE CODE:}
+	\begin{itemize}
+		\item Start: net START MYSQL80
+		\item Stop: net STOP MYSQL80
+		\item Restart: 
+	\end{itemize}
+	
+	{\bf DISPLAY RESULTS:}
+		\begin{figure}[!h]
+		\subfloat[Start]
+  			{\includegraphics[width=.3\linewidth]{Tuần 9-1-1}}\hfill
+		\subfloat[Stop]
+  			{\includegraphics[width=.3\linewidth]{Tuần 9-1-2}}\hfill
+ 		\subfloat[Restart]
+  			{\includegraphics[width=.3\linewidth]{Tuần 9-1-3}}\hfill
+		\caption{Bài 1}
+		\end{figure}
+
+
+\subsection{Bài 2}
+	\begin{center}
+		{\it Users, Roles, and Privileges}
+	\end{center}
+	
+	{\bf SOURCE CODE:}
+	\begin{itemize}
+		\item Create roles:
+		\begin{lstlisting}
+			CREATE ROLE 
+    			crm_dev, 
+    			crm_read, 
+    			crm_write;
+		\end{lstlisting}
+		\item Create users:
+		\begin{lstlisting}
+			CREATE USER bob@localhost identified by 'Secure1pass!';
+		\end{lstlisting}
+		\item Change role password:
+		\begin{lstlisting}
+			SET PASSWORD FOR 'dbadmin'@'localhost' = PASSWORD('bigshark');
+		\end{lstlisting}
+		\item Drop user:
+		\begin{lstlisting}
+			drop user dbadmin@localhost
+		\end{lstlisting}
+		\item Grant and Assign roles:
+		\begin{lstlisting}
+			GRANT INSERT 
+			ON classicmodels.* 
+			TO bob@localhost;
+		\end{lstlisting}
+		\item Grant and Revoke privileges:
+		\begin{lstlisting}
+			REVOKE INSERT, UPDATE
+			ON classicmodels.*
+			FROM rfc@localhost;
+		\end{lstlisting}
+	\end{itemize}
+
+	{\bf DISPLAY RESULTS:}
+		\begin{figure}[!h]
+		\subfloat[Create roles]
+  			{\includegraphics[width=.3\linewidth]{Tuần 9-2-1}}\hfill
+		\subfloat[Create users]
+  			{\includegraphics[width=.3\linewidth]{Tuần 9-2-2}}\hfill
+ 		\subfloat[Change role password]
+  			{\includegraphics[width=.3\linewidth]{Tuần 9-2-3}}\hfill
+		\subfloat[Drop user]
+  			{\includegraphics[width=.3\linewidth]{Tuần 9-2-4}}\hfill
+		\subfloat[Grant and Assign roles]
+  			{\includegraphics[width=.3\linewidth]{Tuần 9-2-5}}\hfill
+ 		\subfloat[Grant and Revoke privileges]
+  			{\includegraphics[width=.3\linewidth]{Tuần 9-2-6}}\hfill
+		\caption{Bài 2 (\href{https://drive.google.com/drive/folders/1NnueamqosCX5AvXE-wK86MoIEI4dA5RE}{\bf link})}
+		\end{figure}
+
+
+\subsection{Bài 3}
+	\begin{center}
+		{\it Show commands}
+	\end{center}
+	
+	{\bf SOURCE CODE:}
+	\begin{itemize}
+		\item Show databses
+		\item Show tables
+	\end{itemize}
+	
+	{\bf DISPLAY RESULTS:}
+	
+	\begin{center}
+		\includegraphics[width=\linewidth]{Tuần 9-3}
+	\end{center}
+
+\subsection{Bài 4}
+	\begin{center}
+		{\it Backup and Restore}
+	\end{center}
+	
+	{\bf SOURCE CODE:}
+	\begin{itemize}
+		\item Backup: mysqldump --user=root --password=Supe!rPass1 --result-file=c:\textbackslash backup\textbackslash classicmodels.sql --databases classicmodels
+		\item Restore: mysql>source c:\textbackslash backup\textbackslash mydb.sql
+	\end{itemize}
+
+	{\bf DISPLAY RESULTS:}
+	
+		\includegraphics[width=.8\linewidth]{Tuần 9-4}
+
+
+\subsection{Bài 5}
+	\begin{center}
+		{\it Database maintenance}
+	\end{center}
+
+	{\bf SOURCE CODE:}
+	\begin{lstlisting}
+		ANALYZE TABLE payments;
+		OPTIMIZE TABLE payments;
+		REPAIR TABLE payments;
+	\end{lstlisting}
+	
+	{\bf DISPLAY RESULTS:}
+	
+		\includegraphics[width=.8\linewidth]{Tuần 9-5}
+
+
+
+
+\chapter{Kết luận}                         % Chương 3
+
+	Qua 18 tuần học bộ môn Cơ Sở Dữ Liệu vơi sự giảng dạy nhiệt tình, tận tâm của Ths. Nguyễn Danh Tú, em đã nắm được những điều cơ bản nhất trong bộ môn này. Sau khi học xong em xin được tóm tắt những kiến thức đã được em cô đọng lại:
+	\begin{itemize}
+		\item Tư duy thiết kế CSDL, đọc và phân tích các lược đồ.
+		\item Hiểu đươc mối quan hệ giữa các thực thể trong lược đồ, ý nghĩa của những dữ liệu. Từ đó có thể phát triển, nâng cấp hay chuẩn hóa các CSDL.
+		\item Cách đặt câu hỏi để khai phá dữ liệu có trong CSDL, nắm được các đặc trưng của CSDL và đưa ra những truy vấn chính xác.
+		\item Sử dụng được các hệ quản trị CSDL: tạo CSDL, thay đổi cấu trúc CSDL, nâng cấp và bảo hành CSDL.
+		\item Cách xử lí các dữ liệu trong khi đưa vào CSDL.
+		\item Viết được các procedure và functions từ cơ bản đến phức tạp.
+		\item Tối ưu các truy vấn bằng các phương pháp như tinh chỉnh hay tạo index, partition.
+		\item Hiểu và thực thi được các nghiệp vụ thực tế liên quan đến CSDL.
+		\item Nắm được các định nghĩa, tính chất, thuật toán: Sự bất thường trong CSDL, các tính chất của phụ thuộc hàm, tiên đề Amstrong và hệ quả, các phương pháp tìm khóa, cách tách lược đồ, kiêm tra phép tách, các dạng chuẩn CSDL.
+		\item Làm được các tác vụ nâng cao liên quan đến Administration.
+		\item Nâng cao năng suất làm việc với các thành viên trong nhóm, giao tiếp để đạt hiệu quả cao, cùng với kĩ năng thuyết trình và viết báo cáo.
+	\end{itemize}
+	
+	Thời gian 18 tuần cũng không phải là quá dài nên trong quá trình học có nhiều chỗ khiến em chưa hiểu và gặp khó khăn, một số nơi kiến thức bị bỏ sót nên em mong bản báo cáo này sẽ là một cách để em rà soát lại những kiến thức. Em xin cảm ơn những kiến thức bổ ích mà thầy {\bf Nguyễn Danh Tú} đã giảng dạy cho lớp trong học phần này.
+
+
+\begin{thebibliography}{99}               % Tài liệu tham khảo   
+\addcontentsline{toc}{chapter}{{\bf  Tài liệu tham khảo}\rm} 
+
+\bibitem{GG}  Google.
+\bibitem{Mydoc} MySQL Documentation.
+\bibitem{viblo} viblo.asia
+\bibitem{sli} Slide.
+
+% Chú thích: mỗi tài liệu là một bibitem.
+
+\end{thebibliography}
+
+
+\end{document}
+
+%Một số chú ý:
+%-Sau phần \end{document} thì văn bản không còn hiển thị.
+%-Các siêu liên kết (tên PT, định lí... được tham chiếu) thường có ô vuông đỏ bao quanh. Các bạn yên tâm, khi in ra sẽ ko xuất hiện cái ô vuông đó!
